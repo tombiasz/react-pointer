@@ -7,7 +7,15 @@ const Map = withScriptjs(withGoogleMap((props) =>
     defaultZoom={8}
     defaultCenter={{ lat: -34.397, lng: 150.644 }}
   >
-    {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} />}
+    {props.pois.map((poi) => {
+        return <Marker
+            key={poi.id}
+            position={{
+                lat: poi.point.coordinates[1],
+                lng: poi.point.coordinates[0]
+            }
+        } />
+    })}
   </GoogleMap>
 ))
 
