@@ -4,10 +4,11 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-map
 
 const Map = props => (
     <GoogleMap
+        ref={props.setZoom}
         defaultZoom={8}
         defaultCenter={{ lat: -34.397, lng: 150.644 }}
     >
-        {props.pois.map((poi) => {
+        {props.markers.map((poi) => {
             return <Marker
                 key={poi.id}
                 position={{
