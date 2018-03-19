@@ -9,7 +9,7 @@ class App extends Component {
     render() {
       return (
         <div className="">
-          <nav className="blue darken-2">
+          <nav className="blue darken-2 z-depth-0">
             <div className="nav-wrapper">
               <a href="#" className="brand-logo">Logo</a>
               <ul id="nav-mobile" className="right hide-on-med-and-down">
@@ -20,8 +20,28 @@ class App extends Component {
             </div>
           </nav>
 
-          <div style={{height: '100%'}} >
-            <MapContainer />
+          <div class="row">
+            <div class="col s6">
+              <div class="row">
+                <div class="col s12">
+                  <div class="card">
+                    <div class="card-content">
+                      <span class="card-title">Card Title</span>
+                      <p>I am a very simple card. I am good at containing small bits of information.
+                      I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="#">This is a link</a>
+                      <a href="#">This is a link</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col s6" style={{ padding: '0'}}>
+              <MapContainer />
+            </div>
           </div>
         </div>
       );
