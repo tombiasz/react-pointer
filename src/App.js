@@ -1,10 +1,28 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import axios from 'axios';
+
 import MapContainer from './containers/MapContainer';
 
 
 class App extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            pois: []
+        };
+    }
+
+    componentDidMount() {
+        const pointerApiURL = process.env.REACT_APP_POINTER_API_URL;
+        const poisURL = `${pointerApiURL}/pois/`;
+        axios
+            .get(poisURL)
+            .then((result) => this.setState({pois: result.data}))
+            .catch(console.log)
+    }
 
     render() {
       return (
@@ -40,7 +58,7 @@ class App extends Component {
             </div>
 
             <div class="col s6" style={{ padding: '0'}}>
-              <MapContainer />
+              <MapContainer pois={ this.state.pois} />
             </div>
           </div>
         </div>
