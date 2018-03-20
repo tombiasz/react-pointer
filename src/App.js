@@ -38,28 +38,26 @@ class App extends Component {
             </div>
           </nav>
 
-          <div class="row">
-            <div class="col s6">
-              <div class="row">
-                <div class="col s12">
-                  <div class="card">
-                    <div class="card-content">
-                      <span class="card-title">Card Title</span>
+          <div className="row">
+
+            <div className="col s6">
+              { this.state.pois.map((poi) => (
+                <div className="row" key={poi.id}>
+                  <div className="col s12">
+                    <div className="card-panel hoverable">
+                      <span className="card-title">{ poi.name }</span>
                       <p>I am a very simple card. I am good at containing small bits of information.
                       I am convenient because I require little markup to use effectively.</p>
                     </div>
-                    <div class="card-action">
-                      <a href="#">This is a link</a>
-                      <a href="#">This is a link</a>
-                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
 
-            <div class="col s6" style={{ padding: '0'}}>
+            <div className="col s6" style={{ padding: '0'}}>
               <MapContainer pois={ this.state.pois} />
             </div>
+
           </div>
         </div>
       );
