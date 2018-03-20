@@ -4,6 +4,7 @@ import './App.css';
 import axios from 'axios';
 
 import MapContainer from './containers/MapContainer';
+import PoiCardContainer from './containers/PoiCardContainer';
 
 
 class App extends Component {
@@ -42,15 +43,7 @@ class App extends Component {
 
             <div className="col s6">
               { this.state.pois.map((poi) => (
-                <div className="row" key={poi.id}>
-                  <div className="col s12">
-                    <div className="card-panel hoverable">
-                      <span className="card-title">{ poi.name }</span>
-                      <p>I am a very simple card. I am good at containing small bits of information.
-                      I am convenient because I require little markup to use effectively.</p>
-                    </div>
-                  </div>
-                </div>
+                < PoiCardContainer poi={poi} />
               ))}
             </div>
 
