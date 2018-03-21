@@ -12,17 +12,28 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            pois: []
+            pois: [],
+            intervalId: null,
         };
     }
 
     componentDidMount() {
-        const pointerApiURL = process.env.REACT_APP_POINTER_API_URL;
-        const poisURL = `${pointerApiURL}/pois/`;
-        axios
-            .get(poisURL)
-            .then((result) => this.setState({pois: result.data}))
-            .catch(console.log)
+      const intervalId = setInterval(this.fetchPois, 15000);
+      this.setState({intervalId})
+      this.fetchPois();
+    }
+
+    componentWillUnmount() {
+      clearInterval(this.state.intervalId);
+    }
+
+    fetchPois() {
+      const pointerApiURL = process.env.REACT_APP_POINTER_API_URL;
+      const poisURL = `${pointerApiURL}/pois/`;
+      axios
+          .get(poisURL)
+          .then((result) => this.setState({pois: result.data}))
+          .catch(console.log)
     }
 
     render() {
