@@ -56,7 +56,7 @@ class App extends Component {
 
             <div className="col s6">
               { this.state.pois.map((poi) => (
-                < PoiCardContainer poi={poi} />
+                <PoiCardContainer key={poi.id} poi={poi} />
               ))}
             </div>
 
