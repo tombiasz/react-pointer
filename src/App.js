@@ -18,7 +18,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-      const intervalId = setInterval(this.fetchPois, 15000);
+      const intervalId = setInterval(() => this.fetchPois(), 15000);
       this.setState({intervalId})
       this.fetchPois();
     }
