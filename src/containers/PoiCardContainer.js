@@ -7,7 +7,11 @@ class PoiCardContainer extends Component {
 
     render() {
       return (
-        <PoiCard poi={ this.props.poi }/>
+        <PoiCard
+          poi={this.props.poi}
+          onMouseEnter={this.props.onMouseEnter}
+          onMouseLeave={this.props.onMouseLeave}
+        />
       );
     }
 

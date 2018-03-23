@@ -14,6 +14,7 @@ class App extends Component {
         this.state = {
             pois: [],
             intervalId: null,
+            selectedPoiId: null,
         };
     }
 
@@ -36,6 +37,14 @@ class App extends Component {
           .catch(console.log)
     }
 
+    animateMapMarkerStart(poiId) {
+      this.setState({selectedPoiId: poiId});
+    }
+
+    animateMapMarkerEnd() {
+      this.setState({selectedPoiId: null});
+    }
+
     render() {
       return (
         <div className="">
@@ -55,13 +64,21 @@ class App extends Component {
           <div className="row">
 
             <div className="col s6">
-              { this.state.pois.map((poi) => (
-                <PoiCardContainer key={poi.id} poi={poi} />
+              {this.state.pois.map((poi) => (
+                <PoiCardContainer
+                  key={poi.id}
+                  poi={poi}
+                  onMouseEnter={() => this.animateMapMarkerStart(poi.id)}
+                  onMouseLeave={() => this.animateMapMarkerEnd()}
+                />
               ))}
             </div>
 
             <div className="col s6" style={{ padding: '0'}}>
-              <MapContainer pois={ this.state.pois} />
+              <MapContainer
+                pois={this.state.pois}
+                animatePoiId={this.state.selectedPoiId}
+              />
             </div>
 
           </div>
