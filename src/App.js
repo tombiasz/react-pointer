@@ -14,7 +14,7 @@ class App extends Component {
         this.state = {
             pois: [],
             intervalId: null,
-            selectedPoiId: null,
+            hoveredPoiId: null,
         };
     }
 
@@ -38,11 +38,11 @@ class App extends Component {
     }
 
     animateMapMarkerStart(poiId) {
-      this.setState({selectedPoiId: poiId});
+      this.setState({hoveredPoiId: poiId});
     }
 
     animateMapMarkerEnd() {
-      this.setState({selectedPoiId: null});
+      this.setState({hoveredPoiId: null});
     }
 
     render() {
@@ -77,7 +77,7 @@ class App extends Component {
             <div className="col s6" style={{ padding: '0'}}>
               <MapContainer
                 pois={this.state.pois}
-                animatePoiId={this.state.selectedPoiId}
+                animatePoiId={this.state.hoveredPoiId}
               />
             </div>
 
