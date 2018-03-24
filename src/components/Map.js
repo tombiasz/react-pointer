@@ -4,7 +4,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-map
 
 const Map = props => (
     <GoogleMap
-        ref={props.setZoom}
+        ref={props.centerMap}
         defaultZoom={8}
         defaultCenter={{ lat: -34.397, lng: 150.644 }}
     >

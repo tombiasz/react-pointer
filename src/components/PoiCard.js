@@ -5,7 +5,8 @@ const PoiCard = props => (
   <div className="row"
     key={ props.poi.id }
     onMouseEnter={ props.onMouseEnter }
-    onMouseLeave={ props.onMouseLeave }
+    onMouseLeave={ props.onMouseEnter }
+    onClick={ props.onClick }
   >
     <div className="col s12">
       <div className="card-panel hoverable">

@@ -15,6 +15,7 @@ class App extends Component {
             pois: [],
             intervalId: null,
             hoveredPoiId: null,
+            clickedPoi: null,
         };
     }
 
@@ -45,6 +46,10 @@ class App extends Component {
       this.setState({hoveredPoiId: null});
     }
 
+    centerOnMarker(poi) {
+      this.setState({clickedPoi: poi});
+    }
+
     render() {
       return (
         <div className="">
@@ -70,6 +75,7 @@ class App extends Component {
                   poi={poi}
                   onMouseEnter={() => this.animateMapMarkerStart(poi.id)}
                   onMouseLeave={() => this.animateMapMarkerEnd()}
+                  onClick={() => this.centerOnMarker(poi)}
                 />
               ))}
             </div>
@@ -78,6 +84,7 @@ class App extends Component {
               <MapContainer
                 pois={this.state.pois}
                 animatePoiId={this.state.hoveredPoiId}
+                centerOnPoi={this.state.clickedPoi}
               />
             </div>
 

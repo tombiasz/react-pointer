@@ -11,6 +11,7 @@ class PoiCardContainer extends Component {
           poi={this.props.poi}
           onMouseEnter={this.props.onMouseEnter}
           onMouseLeave={this.props.onMouseLeave}
+          onClick={this.props.onClick}
         />
       );
     }
