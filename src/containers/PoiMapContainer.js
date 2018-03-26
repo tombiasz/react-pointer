@@ -3,10 +3,10 @@ import React, { Component} from 'react';
 import { Marker } from 'react-google-maps';
 import { MAP } from 'react-google-maps/lib/constants';
 
-import Map from '../components/Map';
+import PoiMap from '../components/PoiMap';
 
 
-class MapContainer extends Component {
+class PoiMapContainer extends Component {
 
   constructor(props) {
     super(props);
@@ -50,7 +50,7 @@ class MapContainer extends Component {
   render() {
     const mapApiKey = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
     return (
-        <Map
+        <PoiMap
           pois={this.props.pois}
           setMapRef={this.setMapRef}
           googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${mapApiKey}&v=3.exp&libraries=geometry,drawing,places`}
@@ -64,4 +64,4 @@ class MapContainer extends Component {
 
 }
 
-export default MapContainer;
+export default PoiMapContainer;

@@ -3,7 +3,7 @@ import './App.css';
 
 import axios from 'axios';
 
-import MapContainer from './containers/MapContainer';
+import PoiMapContainer from './containers/PoiMapContainer';
 import PoiCardContainer from './containers/PoiCardContainer';
 
 
@@ -81,7 +81,7 @@ class App extends Component {
             </div>
 
             <div className="col s6" style={{ padding: '0'}}>
-              <MapContainer
+              <PoiMapContainer
                 pois={this.state.pois}
                 animatePoi={this.state.hoveredPoi}
                 centerOnPoi={this.state.clickedPoi}

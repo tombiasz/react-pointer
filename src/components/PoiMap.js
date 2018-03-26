@@ -2,7 +2,7 @@ import React from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 
 
-const Map = props => (
+const PoiMap = props => (
     <GoogleMap
         ref={props.setMapRef}
         defaultZoom={8}
@@ -21,4 +21,4 @@ const Map = props => (
     </GoogleMap>
 )
 
-export default withScriptjs(withGoogleMap(Map));
+export default withScriptjs(withGoogleMap(PoiMap));
