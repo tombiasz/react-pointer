@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import './App.css';
-
 import axios from 'axios';
+import React, { Component } from 'react';
 
 import NavBar from './components/NavBar';
 import PoiMapContainer from './containers/PoiMapContainer';
 import PoiCardContainer from './containers/PoiCardContainer';
+import './App.css';
 
 
 class App extends Component {
