@@ -1,18 +1,32 @@
-import axios from 'axios';
+import { connect } from 'react-redux'
 import React, { Component } from 'react';
 
+import { getAllPois } from './api';
+import {
+  fetchPoisStart,
+  fetchPoisFinish,
+} from './actions/index';
 import NavBar from './components/NavBar';
 import PoiMapContainer from './containers/PoiMapContainer';
 import PoiCardContainer from './containers/PoiCardContainer';
 import './App.css';
 
+const mapStateToProps = (state, ownProps) => ({
+  pois: state.pois.pois
+})
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  fetchPois: () => {
+    dispatch(fetchPoisStart());
+    getAllPois().then((result) => dispatch(fetchPoisFinish(result.data)));
+  }
+})
 
 class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            pois: [],
             intervalId: null,
             hoveredPoi: null,
             clickedPoi: null,
@@ -20,22 +34,14 @@ class App extends Component {
     }
 
     componentDidMount() {
-      const intervalId = setInterval(() => this.fetchPois(), 15000);
+      const { fetchPois } = this.props;
+      const intervalId = setInterval(() => fetchPois(), 15000);
       this.setState({intervalId})
-      this.fetchPois();
+      fetchPois();
     }
 
     componentWillUnmount() {
       clearInterval(this.state.intervalId);
-    }
-
-    fetchPois() {
-      const pointerApiURL = process.env.REACT_APP_POINTER_API_URL;
-      const poisURL = `${pointerApiURL}/pois/`;
-      axios
-          .get(poisURL)
-          .then((result) => this.setState({pois: result.data}))
-          .catch(console.log)
     }
 
     animateMapMarkerStart(poi) {
@@ -58,7 +64,7 @@ class App extends Component {
           <div className="row">
 
             <div className="col s6">
-              {this.state.pois.map((poi) => (
+              {this.props.pois.map((poi) => (
                 <PoiCardContainer
                   key={poi.id}
                   poi={poi}
@@ -71,7 +77,7 @@ class App extends Component {
 
             <div className="col s6" style={{ padding: '0'}}>
               <PoiMapContainer
-                pois={this.state.pois}
+                pois={this.props.pois}
                 animatePoi={this.state.hoveredPoi}
                 centerOnPoi={this.state.clickedPoi}
               />
@@ -83,4 +89,7 @@ class App extends Component {
     }
 }
 
-export default App;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

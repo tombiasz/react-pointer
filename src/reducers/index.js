@@ -1,8 +1,8 @@
-const rootReducer = (store=[],  action) => {
-  switch (action.type) {
-    default:
-      return store;
-  }
-}
+import { combineReducers } from 'redux';
 
-export default rootReducer;
+import pois from './pois';
+
+
+export default combineReducers({
+  pois,
+});
