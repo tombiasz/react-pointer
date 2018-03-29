@@ -5,7 +5,7 @@ import { getAllPois } from './api';
 import {
   fetchPoisStart,
   fetchPoisFinish,
-} from './actions/index';
+} from './actions/pois';
 import NavBar from './components/NavBar';
 import PoiMapContainer from './containers/PoiMapContainer';
 import PoiCardListContainer from './containers/PoiCardListContainer';

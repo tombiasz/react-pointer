@@ -4,7 +4,7 @@ import {
   animatePoiStart,
   animatePoiEnd,
   selectPoi,
-} from '../actions/index';
+} from '../actions/pois';
 import PoiCard from '../components/PoiCard';
 
 

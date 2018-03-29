@@ -4,7 +4,7 @@ import {
   FETCH_POIS_START,
   FETCH_POIS_FINISH,
   SELECT_POI,
-} from '../actions/index';
+} from '../actions/pois';
 
 
 const defaultState = {
