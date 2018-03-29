@@ -8,11 +8,11 @@ import {
 } from './actions/index';
 import NavBar from './components/NavBar';
 import PoiMapContainer from './containers/PoiMapContainer';
-import PoiCardContainer from './containers/PoiCardContainer';
+import PoiCardListContainer from './containers/PoiCardListContainer';
 import './App.css';
 
+
 const mapStateToProps = (state, ownProps) => ({
-  pois: state.pois.pois
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -25,12 +25,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 class App extends Component {
 
     constructor(props) {
-        super(props);
-        this.state = {
-            intervalId: null,
-            hoveredPoi: null,
-            clickedPoi: null,
-        };
+      super(props);
+      this.state = {
+          intervalId: null,
+      };
     }
 
     componentDidMount() {
@@ -44,45 +42,13 @@ class App extends Component {
       clearInterval(this.state.intervalId);
     }
 
-    animateMapMarkerStart(poi) {
-      this.setState({hoveredPoi: poi});
-    }
-
-    animateMapMarkerEnd() {
-      this.setState({hoveredPoi: null});
-    }
-
-    centerOnMarker(poi) {
-      this.setState({clickedPoi: poi});
-    }
-
     render() {
       return (
         <div>
           <NavBar />
-
           <div className="row">
-
-            <div className="col s6">
-              {this.props.pois.map((poi) => (
-                <PoiCardContainer
-                  key={poi.id}
-                  poi={poi}
-                  onMouseEnter={() => this.animateMapMarkerStart(poi)}
-                  onMouseLeave={() => this.animateMapMarkerEnd()}
-                  onClick={() => this.centerOnMarker(poi)}
-                />
-              ))}
-            </div>
-
-            <div className="col s6" style={{ padding: '0'}}>
-              <PoiMapContainer
-                pois={this.props.pois}
-                animatePoi={this.state.hoveredPoi}
-                centerOnPoi={this.state.clickedPoi}
-              />
-            </div>
-
+            <PoiCardListContainer />
+            <PoiMapContainer />
           </div>
         </div>
       );

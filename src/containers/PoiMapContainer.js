@@ -1,10 +1,27 @@
 import React, { Component} from 'react';
 
+import { connect } from 'react-redux';
 import { Marker } from 'react-google-maps';
 import { MAP } from 'react-google-maps/lib/constants';
 
 import PoiMap from '../components/PoiMap';
 
+
+const mapStateToProps = (state, ownProps) => {
+  const {
+    pois,
+    animatePoi,
+    selectedPoi,
+  } = state.pois;
+  return {
+    pois,
+    animatePoi,
+    selectedPoi,
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+});
 
 class PoiMapContainer extends Component {
 
@@ -20,8 +37,8 @@ class PoiMapContainer extends Component {
     const bounds = new window.google.maps.LatLngBounds();
     this.map.props.children.forEach((child) => {
       if (child.type === Marker) {
-          const {lat, lng} = child.props.position;
-          bounds.extend(new window.google.maps.LatLng(lat, lng));
+        const {lat, lng} = child.props.position;
+        bounds.extend(new window.google.maps.LatLng(lat, lng));
       }
     })
     this.map.fitBounds(bounds);
@@ -42,26 +59,36 @@ class PoiMapContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.centerOnPoi !== null) {
-      this.centerOnMarker(nextProps.centerOnPoi);
+    if (nextProps.selectedPoi !== null) {
+      this.centerOnMarker(nextProps.selectedPoi);
     }
   }
 
   render() {
     const mapApiKey = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
+    const {
+      pois,
+      animatePoi,
+    } = this.props;
+
     return (
+      <div className="col s6" style={{ padding: '0'}}>
         <PoiMap
-          pois={this.props.pois}
+          pois={pois}
           setMapRef={this.setMapRef}
           googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${mapApiKey}&v=3.exp&libraries=geometry,drawing,places`}
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: `100vh` }} />}
           mapElement={<div style={{ height: `100%` }} />}
-          animatePoi={this.props.animatePoi}
+          animatePoi={animatePoi}
         />
+      </div>
     )
   }
 
 }
 
-export default PoiMapContainer;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PoiMapContainer);
