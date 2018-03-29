@@ -1,10 +1,10 @@
 import React, { Component} from 'react';
 
 import { connect } from 'react-redux';
-import { Marker } from 'react-google-maps';
 import { MAP } from 'react-google-maps/lib/constants';
 
 import PoiMap from '../components/PoiMap';
+import PoiMarkerContainer from './PoiMarkerContainer';
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -36,8 +36,8 @@ class PoiMapContainer extends Component {
   showAllMarkers() {
     const bounds = new window.google.maps.LatLngBounds();
     this.map.props.children.forEach((child) => {
-      if (child.type === Marker) {
-        const {lat, lng} = child.props.position;
+      if (child.type === PoiMarkerContainer) {
+        const [lng, lat] = child.props.poi.point.coordinates;
         bounds.extend(new window.google.maps.LatLng(lat, lng));
       }
     })

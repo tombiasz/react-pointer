@@ -1,22 +1,22 @@
 import React from 'react';
 
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
+
+import PoiMarkerContainer from '../containers/PoiMarkerContainer';
 
 
-const PoiMap = ({ pois, animatePoi, setMapRef }) => (
+const PoiMap = ({ pois, setMapRef }) => (
   <GoogleMap
     ref={setMapRef}
     defaultZoom={8}
     defaultCenter={{ lat: -34.397, lng: 150.644 }}
   >
-    {pois.map((poi) => {
-      const [lng, lat] = poi.point.coordinates;
-      return <Marker
+    {pois.map((poi) => (
+      <PoiMarkerContainer
         key={poi.id}
-        position={{ lat, lng }}
-        animation={(animatePoi && animatePoi.id === poi.id) ? window.google.maps.Animation.BOUNCE : null}
+        poi={poi}
       />
-    })}
+    ))}
   </GoogleMap>
 );
 
