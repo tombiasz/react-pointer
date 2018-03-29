@@ -1,21 +1,24 @@
-import React, { Component} from 'react';
+import { connect } from 'react-redux';
 
+import {
+  animatePoiStart,
+  animatePoiEnd,
+  selectPoi,
+} from '../actions/index';
 import PoiCard from '../components/PoiCard';
 
 
-class PoiCardContainer extends Component {
+const mapStateToProps = (state, ownProps) => ({
+  poi: ownProps.poi,
+});
 
-    render() {
-      return (
-        <PoiCard
-          poi={this.props.poi}
-          onMouseEnter={this.props.onMouseEnter}
-          onMouseLeave={this.props.onMouseLeave}
-          onClick={this.props.onClick}
-        />
-      );
-    }
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onMouseEnter: () => dispatch(animatePoiStart(ownProps.poi)),
+  onMouseLeave: () => dispatch(animatePoiEnd()),
+  onClick: () => dispatch(selectPoi(ownProps.poi)),
+});
 
-}
-
-export default PoiCardContainer;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PoiCard);
