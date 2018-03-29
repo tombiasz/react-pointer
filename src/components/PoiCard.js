@@ -5,7 +5,7 @@ const PoiCard = props => (
   <div className="row"
     key={ props.poi.id }
     onMouseEnter={ props.onMouseEnter }
-    onMouseLeave={ props.onMouseEnter }
+    onMouseLeave={ props.onMouseLeave }
     onClick={ props.onClick }
   >
     <div className="col s12">
