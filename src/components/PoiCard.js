@@ -3,7 +3,6 @@ import React from 'react';
 
 const PoiCard = ({ poi, onMouseEnter, onMouseLeave, onClick }) => (
   <div className="row"
-    key={poi.id}
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
     onClick={onClick}
